@@ -11,9 +11,6 @@ const errors = ref([{
 }
 ]);
 
-const error: Ref<string> = ref('white');
-const fondo: Ref<string> = ref('red');
-
 const validations = () => {
 
   // NAME
@@ -40,55 +37,63 @@ const validations = () => {
 </script>
 
 <template>
-  <main class="text-center">
-    <div>
-      <h1 class="mayu">Formulario heavy</h1>
+  <main>
+    <form>
+      <div>
+        <h1 class="mayu">Formulario </h1>
+      </div>
+      <!-- NAME -->
+      <div>
+        <input @input="validations()" v-model="name" type="text" placeholder="Introduce tu nombre">
+      </div>
+      <!-- LASTNAME -->
+      <div>
+        <input @input="validations()" v-model="lastname" type="text" placeholder="Introduce tu apellido">
+      </div>
+      <!-- EDAD -->
+      <div>
+        <input @input="validations()" v-model="age" type="number" placeholder="Introduce tu edad">
+      </div>
+      <!-- GENERO -->
+      <div>
+        <select v-model="genero">
+          <option value="" selected disabled>Selecciona una opcion</option>
+          <option value="masc">Masculino</option>
+          <option value="feme">Femenino</option>
+          <option value="otro">Otro</option>
+        </select>
+        <input v-if="genero === 'otro'" type="text" placeholder="Especifica otro género">
+      </div>
+      <button @submit="validations()">Enviar</button>
+    </form>
+    <div class="error">
+      <h3>Errors :</h3>
+      <span v-for="(error, index) in errors" :key="index">
+        {{ error }}
+      </span>
     </div>
-    <div>
-      <h1 :style="{ color: error, background: fondo }">{{ name }}</h1>
-      <h2 :class="{ 'error': age > 10 }">{{ age }}</h2>
-    </div>
-    <!-- NAME -->
-    <div>
-      <input @input="validations()" v-model="name" type="text" placeholder="Introduce tu nombre">
-    </div>
-    <!-- LASTNAME -->
-    <div>
-      <input @input="validations()" v-model="lastname" type="text" placeholder="Introduce tu apellido">
-    </div>
-    <!-- EDAD -->
-    <div>
-      <input @input="validations()" v-model="age" type="number" placeholder="Introduce tu edad">
-    </div>
-    <!-- GENERO -->
-    <div>
-      <select v-model="genero">
-        <option value="" selected disabled>Selecciona una opcion</option>
-        <option value="masc">Masculino</option>
-        <option value="feme">Femenino</option>
-        <option value="otro">Otro</option>
-      </select>
-      <input v-if="genero === 'otro'" type="text" placeholder="Especifica otro género">
-    </div>
-    <h3>Errors :</h3>
-    <span v-for="(error, index) in errors" :key="index">
-      {{ error }}
-    </span>
   </main>
 </template>
 
 <style scoped>
-.text-center {
+form {
+  background: #f9f9f9;
+  border-radius: 25px;
   text-align: center;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .mayu {
   text-transform: uppercase;
+  color: #0c0c0c;
 }
 
 .error {
+  text-align: center;
   color: rgb(255, 255, 255);
   background: rgb(255, 0, 0);
-  border: 1px solid rgb(204, 180, 0);
 }
 </style>
