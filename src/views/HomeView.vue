@@ -13,11 +13,11 @@ const validations = () => {
   limpiar();
   // NAME
   if (name.value.length > 18) {
-    errors.value.push("mucho texto");
+    errors.value.push("Exceso de carácteres");
   }
 
   if (name.value.length < 5) {
-    errors.value.push("poco texto");
+    errors.value.push("Mínimo 5 carácteres");
   }
   // LASTNAME
   if (lastname.value.length == name.value.length) {
@@ -25,11 +25,11 @@ const validations = () => {
   }
   // AGE
   if (age.value > 60) {
-    errors.value.push("mucho edad");
+    errors.value.push("Edad max 60");
   }
 
   if (age.value < 0) {
-    errors.value.push("poca edad");
+    errors.value.push("Edad min 0");
   }
 
 }
@@ -46,7 +46,6 @@ const limpiar = () => {
       </div>
       <!-- ERRORES -->
       <div class="error">
-        <h3>Mensajes :</h3>
         <span v-for="(error, index) in errors" :key="index">
           {{ error }} <br>
         </span>
